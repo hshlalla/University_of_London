@@ -57,7 +57,7 @@ var killingRecord_fatality_ = ['LIANNE COURTWOOD', 'JACQUELINE DURANTS', 'JAUNIT
 
 function preload()
 {
-	countyMap = loadImage("map.png")
+	countyMap = loadImage("map.png");
 }
 
 function setup()
@@ -68,32 +68,42 @@ function setup()
 	image(countyMap, 0,0);
 
 	//add your code below here
-
-	for(let j = 0 ; j < caseyFryLog.pos_x.length ; j++)
+    
+    for(let j =0; j<caseyFryLog.pos_x.length;j++)
         {
-            noStroke()
+            noStroke();
             fill(173,255,47);
-            ellipse(caseyFryLog.pos_x[j],caseyFryLog.pos_y[j],9,9)
-
-            for(let k = 0 ; k < killingRecord_location_x.length ; k++)
+            ellipse(caseyFryLog.pos_x[j],caseyFryLog.pos_y[j],9,9);
+            for(let k =0; k<killingRecord_location_x.length;k++)
                 {
                     noFill();
                     stroke(244,164,96);
-                    rectMode("Center");
-                    rect(killingRecord_location_x[k],killingRecord_location_y[k],9,9)
-                    if(dist(caseyFryLog.pos_x[j],caseyFryLog.pos_y[j],
-                        killingRecord_location_x[k],killingRecord_location_y[k])<56)
-                        {console.log(k,killingRecord_fatality_[k]),
-                            possibleMatches.push({
-                                crime:{
-                                    x:caseyFryLog.pos_x[j],
-                                    y:caseyFryLog.pos_y[j],
-                                    victimName: killingRecord_fatality_[k]}, 
-                                suspect:{
-                                    x:killingRecord_location_x[k], y:killingRecord_location_y[k]} })
+                    rectMode("center");
+                    rect(killingRecord_location_x[k],killingRecord_location_y[k],9,9);
+                    if(dist(caseyFryLog.pos_x[j],
+                            caseyFryLog.pos_y[j],
+                            killingRecord_location_x[k],
+                            killingRecord_location_y[k])<56)
+                        {
+//                            possibleMatches.push({"aa":killingRecord_location_x[k]});
+                            possibleMatches.push(
+                                {"crime":{"x":killingRecord_location_x[k],
+                                          "y":killingRecord_location_y[k],
+                                          "victimName":killingRecord_fatality_[k]},
+                                 "suspect":{"x":caseyFryLog.pos_x[j],
+                                            "y":caseyFryLog.pos_y[j]}});
+                            console.log(j,k,possibleMatches);
+                            
+                                            
                         }
                 }
         }
+
+    
+
+    
+
+
 
 	// code to draw the matches ( if any)
 	for(let i = 0 ; i < possibleMatches.length ; i++)
