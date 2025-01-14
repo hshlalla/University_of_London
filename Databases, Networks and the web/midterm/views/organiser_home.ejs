@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Organiser Home</title>
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">Morning Yoga</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/organiser">Organiser Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/attendee">Attendee Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="my-4">Organiser Home Page</h1>
+        <p class="lead"><strong><%= managerName %></strong>: <%= managerDescription %></p>
+
+        <h2 class="mt-4">Published Events</h2>
+        <ul class="list-group mb-4">
+            <% publishedEvents.forEach(event => { %>
+                <li class="list-group-item">
+                    <strong><%= event.title %></strong> - Created: <%= event.created_at %>, Published: <%= event.published_at %>
+                    <br>
+                    <a href="/attendee/<%= event.id %>" class="btn btn-link">View as Attendee</a>
+                    <form action="/organiser/delete-event/<%= event.id %>" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+
+        <h2 class="mt-4">Draft Events</h2>
+        <ul class="list-group mb-4">
+            <% draftEvents.forEach(event => { %>
+                <li class="list-group-item">
+                    <strong><%= event.title %></strong> - Created: <%= event.created_at %>
+                    <br>
+                    <a href="/organiser/edit/<%= event.id %>" class="btn btn-link">Edit</a>
+                    <form action="/organiser/publish/<%= event.id %>" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-success btn-sm">Publish</button>
+                    </form>
+                    <form action="/organiser/delete-event/<%= event.id %>" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+
+        <!-- Add Draft Event Form -->
+        <h3 class="mt-4">Add New Draft Event</h3>
+        <form action="/organiser/add-event" method="POST" class="mb-4">
+            <div class="mb-3">
+                <label for="title" class="form-label">Event Title:</label>
+                <input type="text" id="title" name="title" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Event Description:</label>
+                <textarea id="description" name="description" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Draft Event</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap core JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

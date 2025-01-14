@@ -1,0 +1,40 @@
+Hello everyone,
+
+In this presentation, I’ll take you through the implementation of the candlestick processing system we developed. Throughout this project, we faced some challenges, which I’ll also highlight as part of our learning process.
+
+Task 1: Compute Candlestick Data
+
+To start, we built the CandlestickCalculator class to process raw temperature data for a specific country. This class calculates the Open, High, Low, and Close values for each time period. One of the difficulties here was understanding the structure of the dataset and ensuring our code worked efficiently with large amounts of hourly data spanning several years.
+
+We overcame this by optimizing our loop structures and carefully testing the computation logic with smaller datasets before scaling up.
+
+Task 2: Create a Text-Based Plot
+
+Next, we implemented CandlestickPlotter to visually represent the candlestick data as a text-based plot. At first, we faced challenges in determining how to align the markers (|, -, and o) to reflect the range of temperatures. The addition of a fixed scale (-10 to 30) and a zero reference point (o) helped normalize the plots and make the data easier to interpret.
+
+Task 3: Filter Data
+
+For the third task, we developed the CandlestickFilter class, which allows filtering the data by:
+
+Date range.
+Temperature range.
+Initially, understanding how to chain these filters while ensuring they worked on large datasets was tricky. Testing with corner cases, like overlapping date ranges or extreme temperatures, helped us ensure robustness. This filtering system makes the tool more versatile for exploring specific segments of data.
+
+Task 4: Predict Data
+
+Finally, we implemented a prediction system using moving averages. The CandlestickPredictor calculates predictions based on a user-defined window size. Initially, we struggled with integrating the predicted data into the existing visualization system. However, by ensuring the predicted candlesticks matched the structure of the existing ones, we achieved seamless integration.
+
+One key insight was balancing the window size to maintain meaningful predictions without overly smoothing the data.
+
+Challenges and Lessons Learned
+
+Some notable challenges included:
+
+Data Parsing: Initially, understanding and converting the CSV data into our program’s structure required trial and error.
+Text-Based Visualization: Aligning and scaling the text-based plots to handle diverse temperature ranges required multiple iterations.
+Integrating Tasks: Making sure that filtered and predicted data flowed smoothly into the plotting and printing modules required modular code design.
+Conclusion
+
+This project highlights how modular programming and iterative testing can handle real-world data processing tasks. Each module was designed to be reusable and extendable, making this tool versatile for future work in data analysis.
+
+Thank you!

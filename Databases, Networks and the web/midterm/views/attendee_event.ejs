@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Details</title>
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#page-top">Morning Yoga</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/organiser">Organiser Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/attendee">Attendee Home</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h1 class="my-4"><%= event.title %></h1>
+        <p class="lead"><%= event.description %></p>
+
+        <h2 class="mt-4">Registered Attendees</h2>
+        <ul class="list-group">
+            <% if (bookings.length === 0) { %>
+                <li class="list-group-item">No attendees registered yet.</li>
+            <% } else { %>
+                <% bookings.forEach(attendee => { %>
+                    <li class="list-group-item">
+                        <strong><%= attendee.name %></strong> - 
+                        Full Price Tickets: <%= attendee.full_price_tickets %>, 
+                        Concession Tickets: <%= attendee.concession_tickets %>
+                    </li>
+                <% }) %>
+            <% } %>
+        </ul>
+
+        <h2 class="mt-4">Book Your Tickets</h2>
+        <form action="/attendee/book/<%= event.id %>" method="POST">
+            <div class="mb-3">
+                <label for="full_price_tickets" class="form-label">Full Price Tickets:</label>
+                <input type="number" id="full_price_tickets" name="full_price_tickets" class="form-control" min="0" max="<%= event.full_price_tickets %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="concession_tickets" class="form-label">Concession Tickets:</label>
+                <input type="number" id="concession_tickets" name="concession_tickets" class="form-control" min="0" max="<%= event.concession_tickets %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="user_name" class="form-label">Your Name:</label>
+                <input type="text" id="user_name" name="user_name" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Book</button>
+        </form>
+
+        <a href="/attendee" class="btn btn-secondary mt-3">Back to Events</a>
+    </div>
+</body>
+</html>
