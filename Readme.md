@@ -1,2 +1,2 @@
-# University of london에서 수업을 듣고 있어요~ 
-# 제가 들었던 수업에 관련해 자료를 공유해드리고 싶어요 같이 공부해요
+# University of london
+수업중에 나온 자료 project 등 모음
